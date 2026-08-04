@@ -24,10 +24,10 @@ dependencies {
     // :crypto:compileKotlin fails with "Unresolved reference 'NativeLong'".
     // compileOnly for the same reason as lazysodium-java above: the app
     // supplies lazysodium-android (which bundles JNA) at runtime.
-    compileOnly("net.java.dev.jna:jna:5.17.0")
+    compileOnly("net.java.dev.jna:jna:5.19.1")
 
     testImplementation("com.goterl:lazysodium-java:5.2.0")
-    testImplementation("net.java.dev.jna:jna:5.17.0")
+    testImplementation("net.java.dev.jna:jna:5.19.1")
     testImplementation("org.json:json:20260719")
     testImplementation(kotlin("test"))
 }
