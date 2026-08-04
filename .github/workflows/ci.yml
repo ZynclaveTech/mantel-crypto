@@ -39,7 +39,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'   # matches jvmToolchain(21) in android/crypto/build.gradle.kts
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: Test
         # --rerun-tasks: an UP-TO-DATE task prints no failures and reads as a
         # pass. On a repo whose entire purpose is verification, a cached green
