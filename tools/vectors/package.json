@@ -1,0 +1,17 @@
+{
+  "name": "@mantel/vectors",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reference implementation and test-vector oracle for Mantel Protocol v2.",
+  "scripts": {
+    "generate": "node generate.mjs",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "libsodium-wrappers-sumo": "0.7.16"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  }
+}
