@@ -12,6 +12,6 @@
     "libsodium-wrappers-sumo": "0.7.16"
   },
   "devDependencies": {
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.10"
   }
 }
