@@ -1,13 +1,8 @@
 # Security policy
 
-> **BEFORE THIS REPOSITORY IS MADE PUBLIC:** replace `SECURITY_CONTACT_ADDRESS`
-> below with a real, monitored address, and delete this note. A disclosure
-> policy that points nowhere is worse than none — it invites a researcher to
-> find a hole, try to tell you, and give up.
-
 ## Reporting a vulnerability
 
-Email **SECURITY_CONTACT_ADDRESS**. Please do not open a public issue for
+Email **security@mantel.live**. Please do not open a public issue for
 anything with security impact.
 
 Include what you need to make the problem reproducible: the construction or file
