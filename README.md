@@ -29,6 +29,16 @@ behind an environment variable, because a vector file that can be regenerated to
 match the code proves nothing — the point is that the code must match the
 vectors, not the reverse.
 
+## Documentation
+
+A short README and a detailed spec for readers who want to go deeper — see
+[`docs/`](docs/):
+
+- [Protocol specification](docs/PROTOCOL.md) — primitives, key hierarchy, wrapping
+- [File format](docs/FILE-FORMAT.md) — chunking, nonce construction, AAD
+- [Threat model](docs/THREAT-MODEL.md) — what is defended, and what is not
+- [Design decisions](docs/DESIGN-DECISIONS.md) — the load-bearing choices
+
 ## No novel cryptography
 
 Every primitive is a standard libsodium construction:
