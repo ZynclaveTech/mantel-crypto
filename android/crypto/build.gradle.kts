@@ -28,7 +28,7 @@ dependencies {
 
     testImplementation("com.goterl:lazysodium-java:5.2.0")
     testImplementation("net.java.dev.jna:jna:5.17.0")
-    testImplementation("org.json:json:20240303")
+    testImplementation("org.json:json:20260719")
     testImplementation(kotlin("test"))
 }
 
