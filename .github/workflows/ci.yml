@@ -1,0 +1,91 @@
+name: CI
+
+# Runs all three implementations against the shared vector fixture on every
+# push and pull request. The point of this repository is that Swift, Kotlin and
+# the JavaScript oracle agree; a green run here is that claim, continuously
+# checked, rather than asserted in a README.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  swift:
+    # macOS runners bill at 10x, but this package is small and its tests run in
+    # about a second - and the Swift implementation is half the interop claim,
+    # so it cannot be skipped to save minutes.
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Show toolchain
+        run: swift --version
+      - name: Test
+        working-directory: ios/MantelCrypto
+        run: swift test
+
+  kotlin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'   # matches jvmToolchain(21) in android/crypto/build.gradle.kts
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Test
+        # --rerun-tasks: an UP-TO-DATE task prints no failures and reads as a
+        # pass. On a repo whose entire purpose is verification, a cached green
+        # is not evidence.
+        run: ./gradlew :crypto:test --rerun-tasks
+
+  vectors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: tools/vectors/package-lock.json
+      - name: Install
+        working-directory: tools/vectors
+        run: npm ci
+      - name: Test
+        working-directory: tools/vectors
+        run: npm test
+
+  fixture-unchanged:
+    # vectors.json is the oracle all three implementations are measured against.
+    # If a change to it can ride along in an ordinary commit, the fixture stops
+    # being independent evidence and starts being whatever the code says it is.
+    # This does not forbid changing it - it forces the change to be visible and
+    # deliberate in review.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Flag any change to the vector fixture
+        # BASE_REF goes through env rather than being interpolated into the
+        # shell. A ref name is not free-form attacker input here, but a
+        # ${{ }} expansion inside `run:` is a shell-injection shape, and this
+        # repository is a poor place to model one.
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          if git diff --name-only "origin/${BASE_REF}...HEAD" \
+               | grep -qx 'tools/vectors/vectors.json'; then
+            echo "::warning file=tools/vectors/vectors.json::The test-vector fixture changed in this PR. That is allowed, but it must be deliberate: the fixture is what the three implementations are checked against, so changing it to match new code proves nothing. Confirm the vectors were regenerated from an intended protocol change, not to make a failing test pass."
+          else
+            echo "vectors.json unchanged."
+          fi

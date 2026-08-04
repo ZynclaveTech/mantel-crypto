@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/ZynclaveTech/mantel-crypto/security/policy
+    about: Anything with security impact goes here, privately - NOT in a public issue.

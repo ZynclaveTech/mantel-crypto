@@ -1,8 +1,8 @@
 # Mantel Protocol — cryptographic core
 
-The encryption used by [Mantel](https://mantel.live), a private family photo
-app. This repository contains the cryptography and nothing else: no service, no
-account system, no networking.
+The encryption used by [Mantel](https://mantel.live), an end-to-end encrypted
+family photo app. This repository contains the cryptography and nothing else: no
+service, no account system, no networking.
 
 It is public so that the claim "photos are encrypted on your device before they
 are uploaded" can be checked rather than taken on trust.

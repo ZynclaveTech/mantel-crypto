@@ -1,0 +1,16 @@
+# The crypto libraries here are the security boundary; an unpatched libsodium
+# binding matters more than an unpatched build tool.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /tools/vectors
+    schedule: { interval: weekly }
+  - package-ecosystem: gradle
+    directory: /android/crypto
+    schedule: { interval: weekly }
+  - package-ecosystem: swift
+    directory: /ios/MantelCrypto
+    schedule: { interval: weekly }
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
