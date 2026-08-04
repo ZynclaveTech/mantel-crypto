@@ -1,5 +1,8 @@
 # Mantel Protocol — cryptographic core
 
+[![CI](https://github.com/ZynclaveTech/mantel-crypto/actions/workflows/ci.yml/badge.svg)](https://github.com/ZynclaveTech/mantel-crypto/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 The encryption used by [Mantel](https://mantel.live), an end-to-end encrypted
 family photo app. This repository contains the cryptography and nothing else: no
 service, no account system, no networking.
