@@ -11,7 +11,7 @@ let package = Package(
         // Resolves to 0.11.0. Provides Argon2id, crypto_kdf, secretbox and box.
         // Content encryption and SHA-512 go through Clibsodium, which this
         // package also vendors - see ContentStream.swift and SafetyNumber.swift.
-        .package(url: "https://github.com/jedisct1/swift-sodium.git", from: "0.9.1"),
+        .package(url: "https://github.com/jedisct1/swift-sodium.git", from: "0.11.0"),
     ],
     targets: [
         .target(
